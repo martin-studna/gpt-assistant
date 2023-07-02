@@ -7,5 +7,5 @@ unstructured==0.7.12
 libmagic==1.0
 SpeechRecognition==3.10.0
 PyAudio==0.2.13
-pyttsx==2.90
-pyobjc==9.2
+TTS==0.15.4
+sounddevice==0.4.6
