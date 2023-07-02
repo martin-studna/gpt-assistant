@@ -19,13 +19,17 @@ import sounddevice as sd
 from TTS.api import TTS
 import whisper
 
-stt = whisper.load_model("medium") 
+stt = whisper.load_model("large", device="cpu") 
 
 def inference(audio):
     
     buffer = whisper.pad_or_trim(audio[:,0])
     mel = whisper.log_mel_spectrogram(buffer).to(stt.device)
 
+    _, probs = stt.detect_language(mel)
+    
+    lang=max(probs, key=probs.get)
+    
     options = whisper.DecodingOptions(language="en", fp16=False)
     result = whisper.decode(stt, mel, options)
     
